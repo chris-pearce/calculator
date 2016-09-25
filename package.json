@@ -1,8 +1,8 @@
 {
-  "name": "calculator",
+  "name": "javascript-calculator",
   "version": "1.0.0",
   "description": "A simple full viewport calculator built with ES6",
-  "main": "lib/calculator.js",
+  "main": "lib/javascript-calculator.js",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev"
@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chris-pearce/calculator"
+    "url": "https://github.com/chris-pearce/javascript-calculator"
   },
   "author": "Chris Pearce",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chris-pearce/calculator/issues"
+    "url": "https://github.com/chris-pearce/javascript-calculator/issues"
   },
   "homepage": ""
 }

@@ -4,6 +4,11 @@
  */
 export const ROOT = document.getElementById('calculator');
 
+export const DOM = {
+    ROOT: document.getElementById('calculator'),
+    OUTPUT_SCREEN: createOutputScreen()
+};
+
 
 /**
  * All of the operator button text nodes.

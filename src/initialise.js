@@ -4,6 +4,7 @@ import {
     ROOT,
     STYLE_CLASSES
 } from 'constants';
+import handleInput from 'handleInput';
 
 
 /**
@@ -12,14 +13,22 @@ import {
  */
 const initialise = () => {
 
-    // Add a click event to the calculator container element
+    /**
+     * Add a click event to the calculator container element.
+     * @type {Function}
+     */
     const clickEvent = handleInput();
 
     ROOT.addEventListener('click', clickEvent);
 
-    // Call the functions that create the two main UI sections of the calculator
+    /**
+     * Initialise the creation of the output screen.
+     */
     createOutputScreen();
 
+    /**
+     * Initialise the creation of the keypads.
+     */
     createKeypad(STYLE_CLASSES.keypadNumbers, NUMBER_BUTTON_TEXT_NODES);
 
     createKeypad(STYLE_CLASSES.keypadOperators, OPERATOR_BUTTON_TEXT_NODES);

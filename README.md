@@ -1,4 +1,4 @@
-# Calculator
+# JavaScript Calculator
 
 In an effort to get better at JavaScript and ES6 I built a calculator under the mentoring of [Dave Berner](http://davidberner.co.uk/).
 
