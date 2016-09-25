@@ -1,8 +1,8 @@
 # JavaScript Calculator
 
-In an effort to get better at JavaScript and ES6 I built a calculator under the mentoring of [Dave Berner](http://davidberner.co.uk/).
+In an effort to get better at JavaScript and ES6 I'm building a calculator under the mentoring of [Dave Berner](http://davidberner.co.uk/). See the [Issues](https://github.com/chris-pearce/javascript-calculator/issues) section to see what’s left to do.
 
-The calculator is a simple four function calculator and is modeled of the **Basic** variation of the OS X calculator. Please log any bugs [here](https://github.com/chris-pearce/calculator/issues) 👍.
+The calculator is a simple four function calculator and is modeled of the **Basic** variation of the OS X calculator. Please log any bugs [here](https://github.com/chris-pearce/javascript-calculator/issues) 👍.
 
 I’ve done my best to make this calculator accessible as accessibility on the Web is important to me. I’d love to hear of any things I’ve missed or suggestions for improvement. 
 
