@@ -1,17 +1,18 @@
-/**
- * The container element for the calculator.
- * @type {node}
- */
-export const ROOT = document.getElementById('calculator');
+import createOutputScreen from './createOutputScreen';
 
+
+/**
+ * Everything related to the DOM.
+ * @type {Object}
+ */
 export const DOM = {
-    ROOT: document.getElementById('calculator'),
-    OUTPUT_SCREEN: createOutputScreen()
+    root: document.getElementById('calculator'),
+    outputScreen: createOutputScreen()
 };
 
 
 /**
- * All of the operator button text nodes.
+ * All the operator button text nodes.
  * @type {Object}
  */
 export const OPERATOR_BUTTON_TEXT_NODES = Object.freeze({
@@ -43,7 +44,7 @@ export const OPERATOR_BUTTON_TEXT_NODES = Object.freeze({
 
 
 /**
- * All of the number button text nodes.
+ * All the number button text nodes.
  * @type {Object}
  */
 export const NUMBER_BUTTON_TEXT_NODES = Object.freeze({
@@ -95,7 +96,7 @@ export const NUMBER_BUTTON_TEXT_NODES = Object.freeze({
 
 
 /**
- * All of the CSS classes used in the UI.
+ * All the CSS classes.
  * @type {Object}
  */
 export const STYLE_CLASSES = Object.freeze({

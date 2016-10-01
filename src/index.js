@@ -1,4 +1,4 @@
-import initialise from 'initialise';
+import initialise from './initialise';
 
 
 initialise();

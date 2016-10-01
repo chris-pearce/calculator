@@ -1,16 +1,30 @@
 var webpack = require('webpack');
+
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 var path = require('path');
+
 var env = require('yargs').argv.mode;
-var libraryName = 'calculator';
+
 var plugins = [], outputFile;
 
 
 if (env === 'build') {
-    plugins.push(new UglifyJsPlugin({ minimize: true }));
-    outputFile = libraryName + '.min.js';
+    plugins.push(new UglifyJsPlugin(
+        {
+            minimize: true
+        }
+    ));
+    outputFile = 'bundle.min.js';
 } else {
-    outputFile = libraryName + '.js';
+    plugins.push(new CopyWebpackPlugin([
+        {
+            from: __dirname + '/src/index.html',
+            to: __dirname + '/dist'
+        }
+    ]));
+    outputFile = 'bundle.js';
 }
 
 
@@ -19,10 +33,7 @@ var config = {
     devtool: 'source-map',
     output: {
         path: __dirname + '/dist',
-        filename: outputFile,
-        library: libraryName,
-        libraryTarget: 'umd',
-        umdNamedDefine: true
+        filename: outputFile
     },
     module: {
         loaders: [
@@ -34,7 +45,7 @@ var config = {
             {
                 test: /(\.jsx|\.js)$/,
                 loader: 'eslint-loader',
-                exclude: /node_modules/
+                exclude: /(node_modules|dist)/
             }
         ]
     },

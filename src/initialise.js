@@ -1,10 +1,10 @@
 import {
+    DOM,
     NUMBER_BUTTON_TEXT_NODES,
     OPERATOR_BUTTON_TEXT_NODES,
-    ROOT,
     STYLE_CLASSES
-} from 'constants';
-import handleInput from 'handleInput';
+} from './constants';
+import handleInput from './handleInput';
 
 
 /**
@@ -12,19 +12,18 @@ import handleInput from 'handleInput';
  * @description Initialise the calculator program.
  */
 const initialise = () => {
-
     /**
      * Add a click event to the calculator container element.
      * @type {Function}
      */
     const clickEvent = handleInput();
 
-    ROOT.addEventListener('click', clickEvent);
+    DOM.root.addEventListener('click', clickEvent);
 
     /**
-     * Initialise the creation of the output screen.
+     * Append the output screen to the calculator container.
      */
-    createOutputScreen();
+    DOM.root.appendChild(DOM.outputScreen);
 
     /**
      * Initialise the creation of the keypads.

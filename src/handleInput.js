@@ -1,17 +1,11 @@
-import {OPERATOR_BUTTON_TEXT_NODES} from 'constants';
-import {
-    add,
-    subtract,
-    multiply,
-    divide
-} from 'arithmeticOperations';
-import buttonsInOrder from 'buttonsInOrder';
-import insertOutputScreenData from 'insertOutputScreenData';
+import {OPERATOR_BUTTON_TEXT_NODES} from './constants';
+import buttonsInOrder from './buttonsInOrder';
+import updateOutputScreenTextNode from './updateOutputScreenTextNode';
 
 
 /**
  * @function handleInput
- * @description All of the logic for the calculator input handled by the nested closure function
+ * @description All the logic for the calculator input handled by the nested closure function
  *              (see its @description).
  * @return {Function}
  */
@@ -64,7 +58,7 @@ const handleInput = () => {
      *              required i.e. 'order of operations'. Every input is initially read in as a
      *              string but is converted to a number when passed to the arithmetic operation
      *              function. Each number input and calculation result is passed to the
-     *              `insertOutputScreenData` function to be printed out to the output screen. When
+     *              `updateOutputScreenTextNode` function to be printed out to the output screen. When
      *              the clear button is pressed all inputs are reset ready for a new calculation.
      * @param  {Object} e - The click event set on the calculator container element.
      */
@@ -117,18 +111,18 @@ const handleInput = () => {
          * 1. Check input is NOT an operator AND 'first number' from the internal state object is
          *    blank. If true store the 'first number' in the internal state object using the button
          *    value (`e.target.value`) from the click event set on the calculator container
-         *    element and send the button value to the `insertOutputScreenData` function where
+         *    element and send the button value to the `updateOutputScreenTextNode` function where
          *    it'll be printed out for the user to see.
          */
         if (!isOperator && state.operator === '') {
             state.firstNumber += e.target.value;
-            insertOutputScreenData(state.firstNumber);
+            updateOutputScreenTextNode(state.firstNumber);
         } else if (isOperator && state.firstNumber !== '' && state.secondNumber === '') {
             state.operator = e.target.value;
-            insertOutputScreenData(state.firstNumber);
+            updateOutputScreenTextNode(state.firstNumber);
         } else if (!isOperator && state.operator !== '') {
             state.secondNumber += e.target.value;
-            insertOutputScreenData(state.secondNumber);
+            updateOutputScreenTextNode(state.secondNumber);
         } else if (state.secondNumber !== '' && isOperator) {
 
             let result;
@@ -148,7 +142,7 @@ const handleInput = () => {
                     break;
             }
 
-            insertOutputScreenData(result);
+            updateOutputScreenTextNode(result);
 
             state.firstNumber = String(result);
 
@@ -160,7 +154,7 @@ const handleInput = () => {
 
         if (e.target.value === isClearButton) {
             state = resetState();
-            insertOutputScreenData(0);
+            updateOutputScreenTextNode(0);
         }
     };
 

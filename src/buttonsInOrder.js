@@ -1,17 +1,16 @@
 /**
  * @function buttonsInOrder
- * @description Create an array of button display values (aka button text nodes) from the `order`
- *              and `display` keys of a button text node object in the order specified by the
- *              `order` key.
- * @param  {Object} obj - A button text node object.
- * @return {Array} - Array of button display values in their correct order e.g.
- *                   `[7, 8, 9, 4, 5, 6, 1, 2, 3, 0, "."]`.
+ * @description Create an array of button text nodes from the `order` and `display` keys of a
+ *              button text node object in the order specified by the `order` key.
+ * @param  {Object} textNodes - Object of button text nodes.
+ * @return {Array} - Array of button text nodes in their correct order e.g.
+ *                   `[7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.']`.
  */
-const buttonsInOrder = (buttonTextNodeObject) => {
+const buttonsInOrder = (textNodes) => {
     let array = [];
 
-    for (let key in buttonTextNodeObject) {
-        array[buttonTextNodeObject[key].order] = buttonTextNodeObject[key].display;
+    for (let key in textNodes) {
+        array[textNodes[key].order] = textNodes[key].display;
     }
 
     return array;
