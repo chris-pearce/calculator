@@ -3,7 +3,7 @@ import {STYLE_CLASSES} from './constants';
 
 /**
  * @function createOutputScreen
- * @description Create an output screen element with '0' set the default text node.
+ * @description Create an output screen with '0' set as the default text node.
  * @return {Node} - `<output>` element.
  */
 const createOutputScreen = () => {

@@ -7,13 +7,13 @@
  *                   `[7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.']`.
  */
 const buttonsInOrder = (textNodes) => {
-    let array = [];
+    let textNodesInOrder = [];
 
     for (let key in textNodes) {
-        array[textNodes[key].order] = textNodes[key].display;
+        textNodesInOrder[textNodes[key].order] = textNodes[key].display;
     }
 
-    return array;
+    return textNodesInOrder;
 };
 
 

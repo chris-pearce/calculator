@@ -5,6 +5,7 @@ import {
     STYLE_CLASSES
 } from './constants';
 import handleInput from './handleInput';
+import createKeypad from './createKeypad';
 
 
 /**
@@ -20,10 +21,12 @@ const initialise = () => {
 
     DOM.root.addEventListener('click', clickEvent);
 
+
     /**
      * Append the output screen to the calculator container.
      */
     DOM.root.appendChild(DOM.outputScreen);
+
 
     /**
      * Initialise the creation of the keypads.

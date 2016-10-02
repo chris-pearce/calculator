@@ -1,10 +1,21 @@
-import createOutputScreen from './createOutputScreen';
+/**
+ * All the CSS classes.
+ * @type {Object}
+ */
+export const STYLE_CLASSES = Object.freeze({
+    outputScreen: 'calculator__output-screen',
+    keypad: 'calculator__keypad',
+    keypadNumbers: 'calculator__keypad--numbers',
+    keypadOperators: 'calculator__keypad--operators'
+});
 
 
 /**
  * Everything related to the DOM.
  * @type {Object}
  */
+import createOutputScreen from './createOutputScreen';
+
 export const DOM = {
     root: document.getElementById('calculator'),
     outputScreen: createOutputScreen()
@@ -18,15 +29,15 @@ export const DOM = {
 export const OPERATOR_BUTTON_TEXT_NODES = Object.freeze({
     divide: {
         order: 0,
-        display: '÷'
+        display: '/'
     },
     multiply: {
         order: 1,
-        display: '×'
+        display: '*'
     },
     subtract: {
         order: 2,
-        display: '−'
+        display: '-'
     },
     add: {
         order: 3,
@@ -92,16 +103,4 @@ export const NUMBER_BUTTON_TEXT_NODES = Object.freeze({
         order: 10,
         display: '.'
     }
-});
-
-
-/**
- * All the CSS classes.
- * @type {Object}
- */
-export const STYLE_CLASSES = Object.freeze({
-    outputScreen: 'calculator__output-screen',
-    keypad: 'calculator__keypad',
-    keypadNumbers: 'calculator__keypad--numbers',
-    keypadOperators: 'calculator__keypad--operators'
 });

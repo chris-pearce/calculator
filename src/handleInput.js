@@ -1,4 +1,4 @@
-import {OPERATOR_BUTTON_TEXT_NODES} from './constants';
+import {OPERATOR_BUTTON_TEXT_NODES, NUMBER_BUTTON_TEXT_NODES} from './constants';
 import buttonsInOrder from './buttonsInOrder';
 import updateOutputScreenTextNode from './updateOutputScreenTextNode';
 
@@ -22,7 +22,7 @@ const handleInput = () => {
      * Store the clear button.
      * @type {string}
      */
-    const isClearButton = OPERATOR_BUTTON_TEXT_NODES.clear.display;
+    // const isClearButton = OPERATOR_BUTTON_TEXT_NODES.clear.display;
 
 
     /**
@@ -30,9 +30,9 @@ const handleInput = () => {
      * @type {Object}
      */
     let state = {
-        firstNumber: '',
+        number: '',
         operator: '',
-        secondNumber: ''
+        sum: []
     };
 
 
@@ -43,9 +43,9 @@ const handleInput = () => {
      */
     const resetState = () => {
         return {
-            firstNumber: '',
+            number: '',
             operator: '',
-            secondNumber: ''
+            sum: []
         };
     };
 
@@ -68,7 +68,11 @@ const handleInput = () => {
          * Check if an input is an operator.
          * @type {Boolean}
          */
-        const isOperator = operators.indexOf(e.target.value) > -1;
+        const isOperatorKeyPress = operators.indexOf(e.target.value) > -1;
+
+        const isDecimalKeyPress = e.target.value === NUMBER_BUTTON_TEXT_NODES.decimal.display;
+
+        const isZeroKeyPress = e.target.value === String(NUMBER_BUTTON_TEXT_NODES.zero.display);
 
 
         /**
@@ -114,47 +118,56 @@ const handleInput = () => {
          *    element and send the button value to the `updateOutputScreenTextNode` function where
          *    it'll be printed out for the user to see.
          */
-        if (!isOperator && state.operator === '') {
-            state.firstNumber += e.target.value;
-            updateOutputScreenTextNode(state.firstNumber);
-        } else if (isOperator && state.firstNumber !== '' && state.secondNumber === '') {
-            state.operator = e.target.value;
-            updateOutputScreenTextNode(state.firstNumber);
-        } else if (!isOperator && state.operator !== '') {
-            state.secondNumber += e.target.value;
-            updateOutputScreenTextNode(state.secondNumber);
-        } else if (state.secondNumber !== '' && isOperator) {
+        if (!isOperatorKeyPress) {
+            const hasDecimal = state.number.indexOf(NUMBER_BUTTON_TEXT_NODES.decimal.display) > -1;
 
-            let result;
-
-            switch (state.operator) {
-                case OPERATOR_BUTTON_TEXT_NODES.divide.display:
-                    result = divide(state.firstNumber, state.secondNumber);
-                    break;
-                case OPERATOR_BUTTON_TEXT_NODES.multiply.display:
-                    result = multiply(state.firstNumber, state.secondNumber);
-                    break;
-                case OPERATOR_BUTTON_TEXT_NODES.subtract.display:
-                    result = subtract(state.firstNumber, state.secondNumber);
-                    break;
-                case OPERATOR_BUTTON_TEXT_NODES.add.display:
-                    result = add(state.firstNumber, state.secondNumber);
-                    break;
+            // If more than 1 decimal is pressed terminate
+            if (hasDecimal && isDecimalKeyPress) {
+                return false;
             }
 
-            updateOutputScreenTextNode(result);
+            // If more than 1 zero is pressed when no other number is pressed terminate
+            if (isZeroKeyPress && state.number === '0') {
+                return false;
+            }
 
-            state.firstNumber = String(result);
+            // When the first keypress is a decimal prepend a zero
+            if (isDecimalKeyPress && state.number.length === 0) {
+                state.number = '0';
+            }
 
+            state.number += e.target.value;
+            updateOutputScreenTextNode(state.number);
+
+            // First time program is run this will be skipped as `operator` is an
+            // empty string. If an operator is pressed push operator into sum then
+            // clear it
+            if (state.operator) {
+                state.sum.push(state.operator);
+                state.operator = '';
+            }
+        } else if (isOperatorKeyPress && (state.sum.length || state.number !== '')) {
+            // If the number is not empty push number into sum and then clear it
+            if (state.number !== '') {
+                state.sum.push(state.number);
+                state.number = '';
+            }
+
+            // Store the operator
             state.operator = e.target.value;
-
-            state.secondNumber = '';
         }
 
+        // Handle result
+        if (e.target.value === OPERATOR_BUTTON_TEXT_NODES.equals.display) {
+            let result = eval(state.sum.join(''));
 
-        if (e.target.value === isClearButton) {
+            updateOutputScreenTextNode(result);
+        }
+
+        // Reset state via the 'Clear' button
+        if (e.target.value === OPERATOR_BUTTON_TEXT_NODES.clear.display) {
             state = resetState();
-            updateOutputScreenTextNode(0);
+            updateOutputScreenTextNode(NUMBER_BUTTON_TEXT_NODES.zero.display);
         }
     };
 

@@ -2,10 +2,9 @@
   "name": "javascript-calculator",
   "version": "1.0.0",
   "description": "A simple full viewport calculator built with ES6",
-  "main": "dist/bundle.js",
+  "main": "dist/bundle.min.js",
   "scripts": {
-    "build": "webpack --mode=build",
-    "dev": "webpack --progress --colors --watch --mode=dev",
+    "start": "webpack --progress --colors --watch",
     "clean": "rm -r dist/*"
   },
   "devDependencies": {
@@ -19,8 +18,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "eslint": "^3.7.0",
     "eslint-loader": "^1.5.0",
-    "webpack": "^1.13.2",
-    "yargs": "^6.0.0"
+    "webpack": "^1.13.2"
   },
   "repository": {
     "type": "git",

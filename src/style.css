@@ -1,0 +1,85 @@
+html {
+    box-sizing: border-box;
+    font-size: 1em;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body,
+div,
+output {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    text-transform: none;
+    -webkit-appearance: button;
+}
+
+button::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+button:-moz-focusring {
+    outline: 1px dotted ButtonText;
+}
+
+
+.calculator {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calculator__output-screen {
+    background: red;
+    flex-basis: 100vw;
+    height: 10vh;
+}
+
+.calculator__keypad {
+    display: flex;
+    height: 90vh;
+}
+
+.calculator__keypad--numbers {
+    background: aqua;
+    flex-basis: 90vw;
+    flex-wrap: wrap;
+}
+
+.calculator__keypad--operators {
+    background: black;
+    flex-basis: 10vw;
+    flex-direction: column;
+}
+
+.calculator__keypad button {
+    color: white;
+    display: block;
+}
+
+.calculator__keypad--numbers button {
+    background: green;
+    width: 30vw;
+}
+
+.calculator__keypad--operators button {
+    background: red;
+    height: 15vh;
+}
