@@ -1,15 +1,15 @@
-import {STYLE_CLASSES} from './constants';
+import {STYLE_CLASSES, NUMBER_BUTTON_TEXT_NODES} from './constants';
 
 
 /**
  * @function createOutputScreen
- * @description Create an output screen with '0' set as the default text node.
+ * @description Create an output screen with zero set as the default text node.
  * @return {Node} - `<output>` element.
  */
 const createOutputScreen = () => {
     const elem = document.createElement('output');
 
-    const textNode = document.createTextNode('0');
+    const textNode = document.createTextNode(NUMBER_BUTTON_TEXT_NODES.zero.display);
 
     elem.classList.add(STYLE_CLASSES.outputScreen);
 

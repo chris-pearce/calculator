@@ -6,14 +6,14 @@
  * @return {Array} - Array of button text nodes in their correct order e.g.
  *                   `[7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.']`.
  */
-const buttonsInOrder = (textNodes) => {
-    let textNodesInOrder = [];
+const buttonsInOrder = textNodes => {
+    let buttonsInOrder = [];
 
     for (let key in textNodes) {
-        textNodesInOrder[textNodes[key].order] = textNodes[key].display;
+        buttonsInOrder[textNodes[key].order] = textNodes[key].display;
     }
 
-    return textNodesInOrder;
+    return buttonsInOrder;
 };
 
 

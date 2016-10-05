@@ -61,43 +61,43 @@ export const OPERATOR_BUTTON_TEXT_NODES = Object.freeze({
 export const NUMBER_BUTTON_TEXT_NODES = Object.freeze({
     one: {
         order: 6,
-        display: 1
+        display: '1'
     },
     two: {
         order: 7,
-        display: 2
+        display: '2'
     },
     three: {
         order: 8,
-        display: 3
+        display: '3'
     },
     four: {
         order: 3,
-        display: 4
+        display: '4'
     },
     five: {
         order: 4,
-        display: 5
+        display: '5'
     },
     six: {
         order: 5,
-        display: 6
+        display: '6'
     },
     seven: {
         order: 0,
-        display: 7
+        display: '7'
     },
     eight: {
         order: 1,
-        display: 8
+        display: '8'
     },
     nine: {
         order: 2,
-        display: 9
+        display: '9'
     },
     zero: {
         order: 9,
-        display: 0
+        display: '0'
     },
     decimal: {
         order: 10,

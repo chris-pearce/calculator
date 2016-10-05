@@ -10,17 +10,17 @@ import createButton from './createButton';
  * @return {Node} - Document fragment of `<button>` elements.
  */
 const createButtons = textNodes => {
-    const container = document.createDocumentFragment();
+    const docFragment = document.createDocumentFragment();
 
     const buttonTextNodes = buttonsInOrder(textNodes);
 
     for (let i = 0; i < buttonTextNodes.length; i++) {
         const currentButton = createButton(buttonTextNodes[i]);
 
-        container.appendChild(currentButton);
+        docFragment.appendChild(currentButton);
     }
 
-    return container;
+    return docFragment;
 };
 
 

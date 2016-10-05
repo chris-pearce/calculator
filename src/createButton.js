@@ -7,9 +7,9 @@
 const createButton = textNode => {
     const elem = document.createElement('button');
 
-    const buttonTextNode = document.createTextNode(textNode);
+    const elemTextNode = document.createTextNode(textNode);
 
-    elem.appendChild(buttonTextNode);
+    elem.appendChild(elemTextNode);
 
     elem.setAttribute('type', 'button');
 

@@ -6,7 +6,7 @@ import {DOM} from './constants';
  * @description Update the text node of the output screen.
  * @param  {string|number} textNode - Text node.
  */
-const updateOutputScreenTextNode = (textNode) => {
+const updateOutputScreenTextNode = textNode => {
     DOM.outputScreen.textContent = textNode;
 };
 

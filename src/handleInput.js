@@ -12,27 +12,23 @@ import updateOutputScreenTextNode from './updateOutputScreenTextNode';
 const handleInput = () => {
 
     /**
-     * Store all of the operators.
+     * All the operators in an array in the order specified by the `order` key of the button text
+     * node object.
      * @type {Array}
      */
     const operators = buttonsInOrder(OPERATOR_BUTTON_TEXT_NODES);
 
 
     /**
-     * Store the clear button.
-     * @type {string}
-     */
-    // const isClearButton = OPERATOR_BUTTON_TEXT_NODES.clear.display;
-
-
-    /**
-     * An internal state object to keep track of inputs for each calculation.
+     * An internal state object used to store and determine type of input (number and operator).
+     * The inputs get pushed into the expression array e.g. `[12 + 3]` so they can be calculated
+     * on.
      * @type {Object}
      */
     let state = {
         number: '',
         operator: '',
-        sum: []
+        expression: []
     };
 
 
@@ -45,128 +41,140 @@ const handleInput = () => {
         return {
             number: '',
             operator: '',
-            sum: []
+            expression: []
         };
     };
 
 
     /**
      * @function handleInputInner
-     * @description Using a series of conditional statements against the internal state object and
-     *              the `isOperator` check, this closure function sends each number input to the
-     *              relevant arithmetic operation function using operator precedence where
-     *              required i.e. 'order of operations'. Every input is initially read in as a
-     *              string but is converted to a number when passed to the arithmetic operation
-     *              function. Each number input and calculation result is passed to the
-     *              `updateOutputScreenTextNode` function to be printed out to the output screen. When
-     *              the clear button is pressed all inputs are reset ready for a new calculation.
+     * @description handle the two inputs: number and operator so the `eval` function can
+     *              correctly perform a calculation when the equals button is pressed. See inline
+     *              comments.
      * @param  {Object} e - The click event set on the calculator container element.
      */
     const handleInputInner = e => {
 
         /**
-         * Check if an input is an operator.
+         * Check for operator button key press.
          * @type {Boolean}
          */
         const isOperatorKeyPress = operators.indexOf(e.target.value) > -1;
 
-        const isDecimalKeyPress = e.target.value === NUMBER_BUTTON_TEXT_NODES.decimal.display;
 
-        const isZeroKeyPress = e.target.value === String(NUMBER_BUTTON_TEXT_NODES.zero.display);
+        /**
+         * Check for decimal button key press.
+         * @type {Boolean}
+         */
+        const isDecimalKeyPress = e.target.value === NUMBER_BUTTON_TEXT_NODES.decimal.display;
 
 
         /**
-         * There are three forms of compulsory input and five forms of optional input to perform a
-         * calculation.
-         *
-         * There are three forms of input needed to perform a calculation: <first number>,
-         * <operator>, and <second number>. Only <second number> is needed once <first number> is
-         * inputted as calculations can keep running until the clear button is pressed, so once
-         * the result is outputted <first number> is set to equal the result.
-         *
-         * The flow to get to the very first calculation result:
-         *
-         *     <first number> inputted
-         *     first <operator> inputted
-         *     <second number> inputted
-         *     second <operator> inputted
-         *     <result> printed
-         *         if: first <operator> and second <operator> are the same, or <equals> is pressed
-         *         else: if first <operator> equals [multiply] or [divide] and second <operator>
-         *               equals [add] or [subtract] input third <number> then print <result> on
-         *               press of third <operator> applying operator precedence only if third
-         *               <operator> equals [add] or [subtract], if third <operator> equals
-         *               [multiply] or [divide] <result> will be second and third <number>
-         *               multiplied or divided, discarding first <number>.
-         *
-         * If 1st <operator> is [multiply] or [divide] return <result> when any second <operator>
-         * or <equals> is pressed.
-         * If 1st <operator> is [add] or [subtract] return <result> when second <operator> equals
-         * [add] or [subtract] or if <equals> is pressed.
-         *
-         * As you can see above the equals isn't actually needed as once the 'second number' is
-         * inputted any operator can perform the equals operation and trigger it being printed to
-         * the output screen—it's there for familiarity. If an operator is inputted immediately
-         * after a previous operator input e.g. <+> <÷> <×> the calculator will take the last one,
-         * the <×> in this case, and discard the rest.
-         *
-         * The following conditional statements are explained in high detail:
-         *
-         * 1. Check input is NOT an operator AND 'first number' from the internal state object is
-         *    blank. If true store the 'first number' in the internal state object using the button
-         *    value (`e.target.value`) from the click event set on the calculator container
-         *    element and send the button value to the `updateOutputScreenTextNode` function where
-         *    it'll be printed out for the user to see.
+         * Check for zero button key press.
+         * @type {Boolean}
+         */
+        const isZeroKeyPress = e.target.value === NUMBER_BUTTON_TEXT_NODES.zero.display;
+
+
+        /**
+         * If number input.
          */
         if (!isOperatorKeyPress) {
+
+            /**
+             * Check if a decimal character exists in the number key value of the internal state
+             * object.
+             * @type {Boolean}
+             */
             const hasDecimal = state.number.indexOf(NUMBER_BUTTON_TEXT_NODES.decimal.display) > -1;
 
-            // If more than 1 decimal is pressed terminate
-            if (hasDecimal && isDecimalKeyPress) {
+            /**
+             * If illegal input of subsequent decimal's occurs exit `handleInputInner()`.
+             */
+            if (isDecimalKeyPress && hasDecimal) {
                 return false;
             }
 
-            // If more than 1 zero is pressed when no other number is pressed terminate
-            if (isZeroKeyPress && state.number === '0') {
+
+            /**
+             * If illegal input of subsequent zero's with no other number input occurs exit
+             * `handleInputInner()`.
+             */
+            if (isZeroKeyPress && state.number === NUMBER_BUTTON_TEXT_NODES.zero.display) {
                 return false;
             }
 
-            // When the first keypress is a decimal prepend a zero
+
+            /**
+             * If first input is a decimal prepend a zero e.g. `.2` = `0.2`.
+             */
             if (isDecimalKeyPress && state.number.length === 0) {
-                state.number = '0';
+                state.number = NUMBER_BUTTON_TEXT_NODES.zero.display;
             }
 
+
+            /**
+             * Store number input including subsequent number inputs.
+             */
             state.number += e.target.value;
+
+
+            /**
+             * Print the number input to the output screen.
+             */
             updateOutputScreenTextNode(state.number);
 
-            // First time program is run this will be skipped as `operator` is an
-            // empty string. If an operator is pressed push operator into sum then
-            // clear it
+
+            /**
+             * If anything exists in the operator key value of the internal state object push it
+             * into the expression array then clear it ready for the next operator input.
+             */
             if (state.operator) {
-                state.sum.push(state.operator);
+                state.expression.push(state.operator);
                 state.operator = '';
             }
-        } else if (isOperatorKeyPress && (state.sum.length || state.number !== '')) {
-            // If the number is not empty push number into sum and then clear it
+
+
+        /**
+         * If operator input and either the expression array is not empty or the number key value
+         * of the internal state object is not blank.
+         */
+        } else if (isOperatorKeyPress && (state.expression.length || state.number !== '')) {
+
+            /**
+             * If the number key value of the internal state object is not blank push it into the
+             * expression array then clear it ready for the next number input.
+             */
             if (state.number !== '') {
-                state.sum.push(state.number);
+                state.expression.push(state.number);
                 state.number = '';
             }
 
-            // Store the operator
+
+            /**
+             * Store operator input.
+             */
             state.operator = e.target.value;
         }
 
-        // Handle result
-        if (e.target.value === OPERATOR_BUTTON_TEXT_NODES.equals.display) {
-            let result = eval(state.sum.join(''));
 
-            updateOutputScreenTextNode(result);
+        /**
+         * If equals input perform calculation by passing the expression array to the `eval`
+         * function and printing the result to the output screen.
+         */
+        if (e.target.value === OPERATOR_BUTTON_TEXT_NODES.equals.display) {
+            let calculation = eval(state.expression.join(''));
+
+            updateOutputScreenTextNode(calculation);
         }
 
-        // Reset state via the 'Clear' button
+
+        /**
+         * Clear all inputs via the 'Clear' button.
+         */
         if (e.target.value === OPERATOR_BUTTON_TEXT_NODES.clear.display) {
             state = resetState();
+
             updateOutputScreenTextNode(NUMBER_BUTTON_TEXT_NODES.zero.display);
         }
     };

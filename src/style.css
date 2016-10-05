@@ -1,5 +1,10 @@
+/**
+ * Base styles.
+ */
+
 html {
     box-sizing: border-box;
+    font-family: sans-serif;
     font-size: 1em;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -21,9 +26,12 @@ output {
 }
 
 button {
+    background: none;
     border: 0;
     cursor: pointer;
-    font: inherit;
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
     margin: 0;
     overflow: visible;
     padding: 0;
@@ -41,15 +49,25 @@ button:-moz-focusring {
 }
 
 
+/**
+ * Calculator styles.
+ */
+
 .calculator {
     display: flex;
     flex-wrap: wrap;
+    font-size: 6vmin;
 }
 
 .calculator__output-screen {
-    background: red;
+    align-items: flex-end;
+    background-color: #eee;
+    display: flex;
     flex-basis: 100vw;
+    font-size: 10vmin;
     height: 10vh;
+    justify-content: flex-end;
+    padding-right: 1vw;
 }
 
 .calculator__keypad {
@@ -58,28 +76,26 @@ button:-moz-focusring {
 }
 
 .calculator__keypad--numbers {
-    background: aqua;
+    background-color: #2d2d2d;
     flex-basis: 90vw;
     flex-wrap: wrap;
 }
 
 .calculator__keypad--operators {
-    background: black;
+    background-color: #c23946;
     flex-basis: 10vw;
     flex-direction: column;
 }
 
 .calculator__keypad button {
-    color: white;
+    color: #fff;
     display: block;
 }
 
 .calculator__keypad--numbers button {
-    background: green;
     width: 30vw;
 }
 
 .calculator__keypad--operators button {
-    background: red;
     height: 15vh;
 }
