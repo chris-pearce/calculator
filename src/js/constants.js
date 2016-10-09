@@ -11,18 +11,6 @@ export const STYLE_CLASSES = Object.freeze({
 
 
 /**
- * Everything related to the DOM.
- * @type {Object}
- */
-import createOutputScreen from './createOutputScreen';
-
-export const DOM = {
-    root: document.getElementById('calculator'),
-    outputScreen: createOutputScreen()
-};
-
-
-/**
  * All the operator button text nodes.
  * @type {Object}
  */
@@ -104,3 +92,16 @@ export const NUMBER_BUTTON_TEXT_NODES = Object.freeze({
         display: '.'
     }
 });
+
+
+/**
+ * Everything related to the DOM.
+ * @type {Object}
+ * @todo Better initiate `createOutputScreen()`.
+ */
+import createOutputScreen from './createOutputScreen';
+
+export const DOM = {
+    root: document.getElementById('calculator'),
+    outputScreen: createOutputScreen()
+};

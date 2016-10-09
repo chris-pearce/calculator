@@ -6,10 +6,10 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 var config = {
-    entry: __dirname + '/src/index.js',
+    entry: __dirname + '/src/js/index.js',
     devtool: 'source-map',
     output: {
-        path: __dirname + '/dist',
+        path: __dirname + '/dist/js',
         filename: 'bundle.min.js'
     },
     module: {
@@ -33,8 +33,8 @@ var config = {
                 to: __dirname + '/dist'
             },
             {
-                from: __dirname + '/src/style.css',
-                to: __dirname + '/dist'
+                from: __dirname + '/src/css/style.css',
+                to: __dirname + '/dist/css'
             }
         ]),
         new UglifyJsPlugin(

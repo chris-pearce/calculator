@@ -77,7 +77,7 @@ button:-moz-focusring {
 
 .calculator__keypad--numbers {
     background-color: #2d2d2d;
-    flex-basis: 90vw;
+    flex-basis: 80vw;
     flex-wrap: wrap;
 }
 

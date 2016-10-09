@@ -12,11 +12,11 @@ import createButtons from './createButtons';
 const createKeypad = (CSSClass, textNodes) => {
     const elem = document.createElement('div');
 
-    elem.classList.add(STYLE_CLASSES.keypad, CSSClass);
-
     const buttons = createButtons(textNodes);
 
     elem.appendChild(buttons);
+
+    elem.classList.add(STYLE_CLASSES.keypad, CSSClass);
 
     DOM.root.appendChild(elem);
 };
