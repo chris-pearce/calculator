@@ -11,6 +11,8 @@ import updateOutputScreenTextNode from './updateOutputScreenTextNode';
  */
 const handleInput = () => {
 
+    let keyPress = '';
+
     /**
      * All the operators in an array in the order specified by the `order` key of the button text
      * node object.
@@ -53,7 +55,6 @@ const handleInput = () => {
      * @param  {Object} e - The click event set on the calculator container element.
      */
     const handleInputInner = e => {
-
 
         /**
          * If click event target is not a `<button>` element don't proceed.
@@ -129,7 +130,7 @@ const handleInput = () => {
             /**
              * Print number input to the output screen.
              */
-            updateOutputScreenTextNode(state.number);
+            updateOutputScreenTextNode(e.target.value);
 
 
             /**
@@ -167,8 +168,13 @@ const handleInput = () => {
             /**
              * Print operator input to the output screen.
              */
-            updateOutputScreenTextNode(state.operator);
+            if (!operators.indexOf(keyPress) > -1) {
+                updateOutputScreenTextNode(` ${state.operator} `);
+            }
         }
+
+
+        keyPress = e.target.value;
 
 
         /**
